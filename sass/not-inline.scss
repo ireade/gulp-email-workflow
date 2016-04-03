@@ -1,0 +1,104 @@
+
+.rssContent {
+
+  a:link, 
+  a:visited, 
+  a.yshortcuts {
+    color: #000;
+    font-weight:normal;
+    text-decoration:underline;
+  }
+
+  h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  img {
+    display:inline;
+    height:auto;
+    width: 100%;
+  }
+
+  pre {
+    display: block;
+    width: 95%;
+    overflow-x: scroll;
+    background-color: #fff;
+    padding: 15px;
+
+    @media screen and (max-width: 600px) {
+      width: 90%;
+    }
+
+  }
+
+  code {
+    background-color: #fff;
+  }
+
+
+  table {
+    border: 3px solid rgb(190, 190, 190);
+    width: 100%;
+    margin: 2em 0;
+  }
+
+  thead {
+    font-weight: 700;
+    text-align: left;
+    background-color: rgb(230, 230, 230);
+  }
+
+  thead tr th {
+    padding: 7px;
+  }
+
+  tr {
+    border-bottom: 3px solid rgb(190, 190, 190);
+  }
+
+  td, 
+  th {
+    border-right: 3px solid rgb(190, 190, 190);
+  }
+
+  td {
+    padding: 7px;
+  }
+
+
+
+
+  /* */
+  
+  .code-addendum {
+    margin-top: -15px;
+    margin-bottom: 2em;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    width: 100%;
+  }
+  .success {
+    background-color: #27ae60;
+  }
+  .warning {
+    background-color: #c0392b;
+  }
+  code span.nt {
+    display: block;
+  }
+
+  
+
+}
+
+
+

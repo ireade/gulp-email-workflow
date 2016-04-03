@@ -1,0 +1,182 @@
+
+@import 
+	'reset'
+;
+
+body {
+	background-color: #F5F5F5; 
+	
+}
+
+$font-stack: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+
+$theme: rgb(255, 219, 58);
+
+a {
+	color:#000;
+}
+
+
+#template-header {
+	font-weight: 400;
+	font-size: 11px; 
+	line-height: 125%;
+	font-family: $font-stack;
+
+	tr {
+		background-color: $theme;
+	}
+
+	.th-preheader td {
+		padding: 20px 20px 0;
+	}
+}
+
+#template-preheader {
+	width: 100%;
+	max-width: 600px;
+
+	td:last-child {
+		text-align: right;
+	}
+}
+
+#template-mainheader {
+	max-width: 600px; 
+	text-align: center; 
+	position: relative;
+}
+
+.article-title {
+	padding: 20px;
+	a {
+		line-height:150%; 
+		color: #000; 
+		font-size: 24px; 
+		font-weight: 400; 
+		text-decoration: none;
+	}
+}
+
+
+
+
+
+
+/* FOOTER */
+
+#template-footer {
+	background-color:#FFFFFF; 
+	border-top: 1px solid #E5E5E5;
+	
+}
+#template-footer-content-container {
+	max-width: 600px; 
+	text-align: center;  
+	position: relative;
+	padding: 30px 10px 20px;
+
+	td {
+		font-family: $font-stack;
+		color:#606060;  
+		font-size: 11px; 
+		line-height: 150%; 
+		padding-right: 20px; 
+		padding-bottom: 5px; 
+		padding-left: 20px; 
+		text-align:center;
+	}
+
+	p {	
+		display: block;
+		margin-bottom: 15px;
+	}
+}
+
+
+#template-content {
+	max-width: 560px; 
+	padding: 20px; 
+	font-size:14px; 
+	line-height:150%; 
+	margin: 0 auto;
+	font-family: $font-stack;
+
+	// border: 1px solid red;
+}
+.rssContent {
+	padding-top: 30px;
+	padding-bottom: 30px; 
+	text-align: left;
+}
+
+/* */
+
+#template-content-footer {
+	font-family: $font-stack;
+	font-weight: 400;
+	font-size: 12px; 
+	line-height:125%;
+
+	tr {
+		background-color: #fff;
+	}
+}
+
+#template-content-footer-container {
+	max-width: 600px; 
+	text-align: center;  
+	position: relative;
+} 
+
+.content-footer-message {
+	.profile {
+		padding: 40px 10px;
+	}
+	.message {
+		padding: 40px 10px; 
+		text-align: left; 
+		vertical-align: middle;
+
+		.message-head {
+			font-size: 18px; 
+			font-weight: 600; 
+			display: block; 
+			margin-bottom: 20px
+		}
+		.message-body {
+			font-size: 14px; 
+			line-height: 1.4
+		}
+	}
+}
+
+.social-share-links {
+
+	td {
+		padding: 10px 20px 20px;
+	}
+
+	.share-btn {
+		background-color: #F5F5F5; 
+		border: 0; 
+		border-bottom: 5px solid $theme;
+		border-radius: 0; 
+        display: inline-block; 
+        margin-right: 10px; 
+        margin-bottom: 10px; 
+        padding: 5px 10px; 
+        text-decoration: none; 
+        font-size: 11px; 
+        font-weight: 600;
+        color: #000; 
+	}
+
+	.share-btn:hover {
+		background-color: $theme;
+	}
+
+}
+
+
+
