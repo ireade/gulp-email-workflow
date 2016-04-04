@@ -14,15 +14,9 @@ var postcssProcessors = [
     autoprefixer( { browsers: ['last 2 versions', 'ie > 10'] } )
 ]
 
-var inlineCss = require('gulp-inline-css');
+gulp.task('sass', function(callback) {
 
-var inlineSASS = 'sass/inline.scss';
-var notInlineSASS = 'sass/not-inline.scss';
-
-var sassFiles = 'sass/*.scss';
-
-gulp.task('css', function() {
-    gulp.src(inlineSASS)
+    var stream = gulp.src('src/sass/inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -30,14 +24,38 @@ gulp.task('css', function() {
             sass({ outputStyle: 'expanded' })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest(''));
+        .pipe(gulp.dest('tmp/'));
 
-    gulp.src('src/index.html')
+    gulp.src('src/sass/not-inline.scss')
         .pipe(
-            inlineCss()
+           postcss(postcssProcessors, {syntax: scss})
+        )
+        .pipe(
+            sass({ outputStyle: 'compressed' })
+            .on('error', gutil.log)
+        )
+        .pipe(gulp.dest('tmp/')); 
+
+
+    return stream; 
+});
+
+
+
+var inlineCss = require('gulp-inline-css');
+
+gulp.task('inlinecss', ['sass'], function() {
+
+    gulp.src('tmp/*.html')
+        .pipe(
+            inlineCss({
+                applyStyleTags: false,
+                removeStyleTags: false
+            })
             .on('error', gutil.log)
         )
         .pipe(gulp.dest('build/'));
+
 });
 
 
@@ -48,17 +66,18 @@ gulp.task('css', function() {
   File Inclued
 ************* */
 
-var fileinclude = require('gulp-file-include');
+var fileInclude = require('gulp-file-include');
 
 gulp.task('fileinclude', function() {
-  gulp.src(['index.html'])
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
-    .pipe(gulp.dest('src/'));
-
-
+  gulp.src(['src/emails/*.html'])
+    .pipe(
+        fileInclude({
+          prefix: '@@',
+          basepath: 'src/'
+        })
+        .on('error', gutil.log)
+    )
+    .pipe(gulp.dest('tmp/'));
     
 });
 
@@ -71,9 +90,9 @@ gulp.task('fileinclude', function() {
 var connect = require('gulp-connect');
 
 gulp.task('connect', function() {
-  connect.server({
-    port: 8000
-  });
+    connect.server({
+        port: 8000
+    });
 });
 
 
@@ -83,7 +102,8 @@ gulp.task('connect', function() {
 ************* */
 
 gulp.task('watch', function() {
-    gulp.watch(sassFiles,['css']); 
+    gulp.watch('src/sass/**/*.scss',['sass', 'inlinecss']); 
+    gulp.watch('src/**/*.html',['fileinclude']); 
 });
 
 
@@ -91,9 +111,7 @@ gulp.task('watch', function() {
     DEFAULT
 ************* */
 
-var activeTasks = ['connect', 'fileinclude', 'css'];
-
-gulp.task('default', activeTasks);
+gulp.task('default', ['connect', 'fileinclude', 'sass', 'inlinecss', 'watch']);
 
 
 
