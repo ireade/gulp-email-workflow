@@ -1,0 +1,22 @@
+{% extends "mailchimp.nunjucks" %}
+
+{% block preheader %} 
+Lorem ipsum dolor sit amet
+{% endblock %}
+
+{% block email_title %} 
+Gulp Email Workflow
+{% endblock %}
+
+{% block email_subtitle %} 
+Subtitle
+{% endblock %}
+
+{% block email_content %} 
+<p>The <a href="https://drafts.csswg.org/css-grid/">CSS Grid Layout Module</a>, although still in Editor's Draft, is nearing finalisation. We can now <a href="http://igalia.github.io/css-grid-layout/enable.html">enable it in a number of browsers</a> for testing and help figure out any bugs it may have.</p> <p>The CSS Grid Layout is <em>really</em> complex, even more so than Flexbox. It has 17 new properties and introduces a lot of new concepts around the way we write css. So, in an attempt to wrap my head around this new specification and figure out how it works, I used it to create the Holy Grail Layout. </p> <h2 id="whatstheholygraillayout">What's the Holy Grail Layout?</h2> <p>The <a href="https://en.wikipedia.org/wiki/Holy_Grail_(web_design)">Holy Grail Layout</a> is a web page layout that consists of four sections - a header, footer, and a main content area with two sidebars, one on each side. The layout also adheres to the following rules - </p> <ul> <li>Has a <strong>fluid center column</strong> width <strong>fixed-width sidebars</strong></li> <li>The center column should appear <strong>first in the markup</strong>, before the two sidebars (but after the header)</li> <li>All three columns should be the <strong>same height</strong>, regardless of the content within them</li> <li>The footer should always be at the <strong>bottom of the browser viewport</strong>, even when the content doesn't fill up the height of the viewport</li> <li>The layout should be <strong>responsive</strong>, all the sections should collapse into one column on smaller viewports</li> </ul> <p>It is famously difficult to create simply in CSS without any hacks.</p> <h2 id="thesolutionwithcssgrid">The Solution with CSS Grid</h2> <p>Here is the solution I came up with using the CSS Grid Layout. First, the markup - </p> <pre><code class="language-html">&lt;body class="hg"&gt; &lt;header class="hg__header"&gt;Title&lt;/header&gt; &lt;main class="hg__main"&gt;Content&lt;/main&gt; &lt;aside class="hg__left"&gt;Menu&lt;/aside&gt; &lt;aside class="hg__right"&gt;Ads&lt;/aside&gt; &lt;footer class="hg__footer"&gt;Footer&lt;/footer&gt; &lt;/body&gt; </code></pre> <p>And the CSS, at only 31 lines (expanded!) - </p> <pre><code class="language-css">.hg__header { grid-area: header; } .hg__footer { grid-area: footer; } .hg__main { grid-area: main; } .hg__left { grid-area: navigation; } .hg__right { grid-area: ads; } .hg { display: grid; grid-template-areas: "header header header" "navigation main ads" "footer footer footer"; grid-template-columns: 150px 1fr 150px; grid-template-rows: 100px 1fr 30px; min-height: 100vh; } @media screen and (max-width: 600px) { .hg { grid-template-areas: "header" "navigation" "main" "ads" "footer"; grid-template-columns: 100%; grid-template-rows: 100px 50px 1fr 50px 30px; } } </code></pre> <p><img src="http://bitsofco.de/content/images/2016/03/Holy_Grail_CSS_Grid.gif" alt="Holy Grail Layout Responsive Demo"></p> <h2 id="breakingitdown">Breaking it Down</h2> <p>As I mentioned, CSS Grid Layout can be very complicated. However, for the purpose of creating this layout, I only used 4 of the 17 new properties - </p> <ul> <li><code>grid-area</code></li> <li><code>grid-template-areas</code></li> <li><code>grid-template-columns</code></li> <li><code>grid-template-rows</code></li> </ul> <p>My solution to the Holy Grail Layout using these CSS Grid properties can be broken down into five steps.</p> <h3 id="1definingthegrid">1. Defining the Grid</h3> <p>The first thing we want to do is define the grid areas, so we can refer to them by this alias when creating the grid. We do this with the <code>grid-area</code> property. </p>
+{% endblock %}
+
+{% block email_footer %} 
+<p>Thanks for reading</p>
+{% endblock %}
+

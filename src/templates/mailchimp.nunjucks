@@ -1,0 +1,75 @@
+{% include "partials/header.nunjucks" %}
+<center id="body-container">
+
+  <!-- PREHEADER //////////////// -->
+  <table border="0" cellpadding="0" cellspacing="0" id="template-preheader" width="100%">
+    <tr>
+      <td mc:edit="preheader_content01" valign="top" width="50%">
+          {% block preheader %}{% endblock %}
+      </td>
+      <td mc:edit="preheader_content02" valign="top" width="50%">
+          <a href="*|ARCHIVE|*">View this email in your browser</a>
+      </td>
+    </tr>
+  </table>
+
+
+  <!-- START TEMPLATE CONTENT //////////////// -->
+  <center id="template-content">
+
+    <!-- EMAIL HEADER -->
+    <table border="0" cellpadding="0" cellspacing="0" id="template-content-header" width="100%">
+      <tr>
+        <td align="center" valign="top">
+            <h1 mc:edit="email_title" class="email-title">
+            {% block email_title %}{% endblock %}
+            </h1>
+            <p mc:edit="email_subtitle" class="email-subtitle">
+            {% block email_subtitle %}{% endblock %}
+            </p>
+        </td>
+      </tr>
+    </table>
+
+
+    <!-- EMAIL CONTENT -->
+    <div mc:edit="body" id="template-content-content">
+      {% block email_content %}{% endblock %}
+    </div>
+
+
+    <!-- EMAIL FOOTER -->
+    <table border="0" cellpadding="0" cellspacing="0" id="template-content-footer" width="100%">
+      <tr>
+        <td align="center" valign="top" mc:edit="email_footer">
+            {% block email_footer %}{% endblock %}
+        </td>
+      </tr>
+    </table>
+
+  </center>
+  <!-- END TEMPLATE CONTENT //////////////// -->
+
+
+  <!-- TEMPLATE FOOTER //////////////// -->
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" id="template-footer">
+    <tr>
+        <td align="center" valign="top">
+          <p>
+            This email was sent to <a href="mailto:*|EMAIL|*" target="_blank">*|EMAIL|*</a>
+          </p>
+          <p>
+            <a href="*|ABOUT_LIST|*" target="_blank"><em>why did I get this?</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UNSUB|*">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="*|UPDATE_PROFILE|*">update subscription preferences</a>
+          </p>
+          <p>
+            <em>Copyright &copy; *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.<br>
+            *|LIST:ADDRESSLINE|*
+            </em>
+          </p>
+          <p>*|REWARDS|*</p>
+      </td>
+    </tr>
+  </table>
+
+</center>
+{% include "partials/footer.nunjucks" %}

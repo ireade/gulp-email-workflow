@@ -4,6 +4,7 @@ body {
 	margin:0; 
 	padding:0;
 	width: 100%;
+	height:100% !important;
 }
 
 img { 
@@ -12,21 +13,12 @@ img {
 	line-height:100%; 
 	outline:none; 
 	text-decoration:none;
+	max-width: 100%
 }
 
 table { 
 	border-collapse:collapse !important;
 }
-
-body, 
-#bodyTable, 
-#bodyCell { 
-	height:100% !important; 
-	margin:0; 
-	padding:0; 
-	width:100% !important;
-}
-
 
 
 /* CLIENT SPECIFIC STYLES */

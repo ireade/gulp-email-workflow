@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{mailchimp.campaign_title}}">
+  <meta property="og:url" content="{{mailchimp.campaign_url}}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>{{mailchimp.page_title}}</title>
+
+  <link rel="stylesheet" href="/inline.css">
+  <style type="text/css">{% include "./../../../tmp/not-inline.css" %}</style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+
+    <div itemscope="" itemtype="http://schema.org/EmailMessage">
+      <div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="{{mailchimp.publisher_name}}">
+        <link itemprop="url" content="{{mailchimp.publisher_url}}">
+      </div>
+      <div itemprop="about" itemscope="" itemtype="http://schema.org/Offer"></div>
+    </div>

@@ -14,9 +14,8 @@ var postcssProcessors = [
     autoprefixer( { browsers: ['last 2 versions', 'ie > 10'] } )
 ]
 
-gulp.task('sass', function(callback) {
-
-    var inline = gulp.src('src/sass/inline.scss')
+gulp.task('sassInline', function(callback) {
+    return gulp.src('src/sass/inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -25,8 +24,11 @@ gulp.task('sass', function(callback) {
             .on('error', gutil.log)
         )
         .pipe(gulp.dest('tmp/'));
+});
 
-    var notInline = gulp.src('src/sass/not-inline.scss')
+
+gulp.task('sassNotInline', function(callback) {
+    return gulp.src('src/sass/not-inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -35,20 +37,14 @@ gulp.task('sass', function(callback) {
             .on('error', gutil.log)
         )
         .pipe(gulp.dest('tmp/')); 
-
-
-    var stream = inline && notInline;
-
-    return stream; 
 });
 
 
 
 var inlineCss = require('gulp-inline-css');
 
-gulp.task('inlinecss', ['sass'], function() {
-
-    gulp.src('tmp/*.html')
+gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
+    return gulp.src('tmp/*.html')
         .pipe(
             inlineCss({
                 applyStyleTags: false,
@@ -64,23 +60,29 @@ gulp.task('inlinecss', ['sass'], function() {
 
 
 
+
 /* *************
-  File Inclued
+  TEMPLATING
 ************* */
 
-var fileInclude = require('gulp-file-include');
+var nunjucksRender = require('gulp-nunjucks-render');
+var data = require('gulp-data');
 
-gulp.task('fileinclude', function() {
-  gulp.src(['src/emails/*.html'])
-    .pipe(
-        fileInclude({
-          prefix: '@@',
-          basepath: 'src/'
-        })
-        .on('error', gutil.log)
-    )
-    .pipe(gulp.dest('tmp/'));
-    
+
+gulp.task('nunjucks', ['sassNotInline'], function() {
+
+    return gulp.src('src/emails/*.nunjucks')
+        .pipe(data(function() {
+            return {
+                mailchimp: require('./src/data/mailchimp.json')
+            };
+
+        }))
+        .pipe(nunjucksRender({
+          path: ['src/templates/', 'tmp/']
+        }))
+        .pipe(gulp.dest('tmp'));
+
 });
 
 
@@ -105,11 +107,13 @@ gulp.task('connect', function() {
 
 var filesToWatch = [
     'src/sass/**/*.scss',
-    'src/**/*.html'
+    'src/emails/*.nunjucks',
+    'src/templates/**/*.nunjucks',
+    'src/data/*.json'
 ]
 
 gulp.task('watch', function() {
-    gulp.watch(filesToWatch,['fileinclude', 'sass', 'inlinecss']); 
+    gulp.watch(filesToWatch,['nunjucks', 'inlinecss']); 
 });
 
 
@@ -117,7 +121,7 @@ gulp.task('watch', function() {
     DEFAULT
 ************* */
 
-gulp.task('default', ['connect', 'fileinclude', 'sass', 'inlinecss', 'watch']);
+gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
 
 
 
