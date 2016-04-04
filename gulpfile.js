@@ -16,7 +16,7 @@ var postcssProcessors = [
 
 gulp.task('sass', function(callback) {
 
-    var stream = gulp.src('src/sass/inline.scss')
+    var inline = gulp.src('src/sass/inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -26,7 +26,7 @@ gulp.task('sass', function(callback) {
         )
         .pipe(gulp.dest('tmp/'));
 
-    gulp.src('src/sass/not-inline.scss')
+    var notInline = gulp.src('src/sass/not-inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -35,6 +35,9 @@ gulp.task('sass', function(callback) {
             .on('error', gutil.log)
         )
         .pipe(gulp.dest('tmp/')); 
+
+
+    var stream = inline && notInline;
 
 
     return stream; 
@@ -101,9 +104,13 @@ gulp.task('connect', function() {
     WATCH
 ************* */
 
+var filesToWatch = [
+    'src/sass/**/*.scss',
+    'src/**/*.html'
+]
+
 gulp.task('watch', function() {
-    gulp.watch('src/sass/**/*.scss',['sass', 'inlinecss']); 
-    gulp.watch('src/**/*.html',['fileinclude']); 
+    gulp.watch(filesToWatch,['fileinclude', 'sass', 'inlinecss']); 
 });
 
 

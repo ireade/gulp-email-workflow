@@ -1,11 +1,15 @@
-@@include('./templates/rss.html', {
-  "campaign": {
-  	"title": "bitsofcode",
-  	"url": "http://eepurl.com/bMpuzD"
+@@include('./templates/mailchimp.html', {
+  "global": {
+  	"campaign_title": "bitsofcode",
+  	"campaign_url": "http://eepurl.com/bMpuzD",
+  	"publisher_name": "*|LIST:COMPANY|*",
+  	"publisher_url": "*|LIST:URL|*",
+  	"page_title": "*|MC:SUBJECT|*"
   },
   "email": {
-    "title": "*|FEEDITEM:TITLE|*",
+    "title": "Email Title",
+    "subtitle": "Subtitle goes here",
     "url": "*|FEEDITEM:URL|*",
-    "content": "./emails/content/holy-grail-layout.html"
+    "content": "*|FEEDITEM:CONTENT_FULL|*"
   }
 })

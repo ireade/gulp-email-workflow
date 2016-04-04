@@ -2,37 +2,44 @@
 	'reset'
 ;
 
-body {
-	background-color: #F5F5F5; 
-}
 
 $font-stack: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
-
 $theme: rgb(255, 219, 58);
+
+$bg-color: #F5F5F5;
+
+
+body {
+	background-color: $bg-color; 
+}
 
 a {
 	color: #000;
 }
 
 
+#body-container {
+	width: 100%;
+	max-width: 600px;
+	margin: 20px auto;
+	background-color: #fff;
+}
+
 #template-header {
 	font-weight: 400;
 	font-size: 11px; 
 	line-height: 125%;
 	font-family: $font-stack;
-
-	tr {
-		background-color: $theme;
-	}
-
-	.th-preheader td {
-		padding: 20px 20px 0;
-	}
 }
 
 #template-preheader {
 	width: 100%;
 	max-width: 600px;
+	background-color: $bg-color;
+
+	td {
+		padding: 15px 10px;
+	}
 
 	td:last-child {
 		text-align: right;
@@ -43,17 +50,21 @@ a {
 	max-width: 600px; 
 	text-align: center; 
 	position: relative;
+	td {
+		background-color: $theme;
+		padding: 20px 15px;
+	}
 }
 
 .article-title {
-	padding: 20px;
-	a {
-		line-height:150%; 
-		color: #000; 
-		font-size: 24px; 
-		font-weight: 400; 
-		text-decoration: none;
-	}
+	line-height:120%; 
+	color: #000; 
+	font-size: 24px; 
+	font-weight: 700; 
+	text-decoration: none;
+}
+.article-subtitle {
+	font-size: 16px;
 }
 
 
@@ -64,7 +75,7 @@ a {
 /* FOOTER */
 
 #template-footer {
-	background-color:#FFFFFF; 
+	background-color: $bg-color; 
 	border-top: 1px solid #E5E5E5;
 	
 }
@@ -92,20 +103,21 @@ a {
 }
 
 
+
+
+/* */
+
 #template-content {
-	max-width: 560px; 
-	padding: 20px; 
-	font-size:14px; 
-	line-height:150%; 
-	margin: 0 auto;
-	font-family: $font-stack;
+	width: 100%;	
 }
 .rssContent {
-	padding-top: 30px;
-	padding-bottom: 30px; 
 	text-align: left;
-	width: 100%;
-	max-width: 560px;
+	max-width: 600px;
+	padding: 30px 20px;
+	font-size: 14px; 
+	line-height: 150%; 
+	margin: 0 auto;
+	font-family: $font-stack;
 }
 
 /* */
@@ -118,6 +130,8 @@ a {
 
 	tr {
 		background-color: #fff;
+
+		background-color: rgb(230, 230, 230)
 	}
 }
 
