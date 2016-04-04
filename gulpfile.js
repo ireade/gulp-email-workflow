@@ -39,7 +39,6 @@ gulp.task('sass', function(callback) {
 
     var stream = inline && notInline;
 
-
     return stream; 
 });
 
