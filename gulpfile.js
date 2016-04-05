@@ -23,12 +23,11 @@ gulp.task('sassInline', function(callback) {
             sass({ outputStyle: 'expanded' })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('tmp/'));
+        .pipe(gulp.dest('build/css/'));
 });
 
-
-gulp.task('sassNotInline', function(callback) {
-    return gulp.src('src/sass/not-inline.scss')
+gulp.task('sassEmbedded', function(callback) {
+    return gulp.src('src/sass/embedded.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
         )
@@ -36,7 +35,7 @@ gulp.task('sassNotInline', function(callback) {
             sass({ outputStyle: 'compressed' })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('tmp/')); 
+        .pipe(gulp.dest('build/css/')); 
 });
 
 
@@ -44,7 +43,7 @@ gulp.task('sassNotInline', function(callback) {
 var inlineCss = require('gulp-inline-css');
 
 gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
-    return gulp.src('tmp/*.html')
+    return gulp.src('build/*.html')
         .pipe(
             inlineCss({
                 applyStyleTags: false,
@@ -53,9 +52,7 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
             .on('error', gutil.log)
         )
         .pipe(gulp.dest('build/'));
-
 });
-
 
 
 
@@ -68,21 +65,23 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
 var nunjucksRender = require('gulp-nunjucks-render');
 var data = require('gulp-data');
 
-
-gulp.task('nunjucks', ['sassNotInline'], function() {
-
-    return gulp.src('src/emails/*.nunjucks')
-        .pipe(data(function() {
-            return {
-                mailchimp: require('./src/data/mailchimp.json')
-            };
-
-        }))
-        .pipe(nunjucksRender({
-          path: ['src/templates/', 'tmp/']
-        }))
-        .pipe(gulp.dest('tmp'));
-
+gulp.task('nunjucks', ['sassEmbedded'], function() {
+    return gulp.src('.src/emails/*.nunjucks')
+        .pipe(
+            data(function() {
+                return {
+                    mailchimp: require('./src/data/mailchimp.json')
+                };
+            })
+            .on('error', gutil.log)
+        )
+        .pipe(
+            nunjucksRender({
+                path: ['.src/templates/', '.build/css/']
+            })
+            .on('error', gutil.log)
+        )
+        .pipe(gulp.dest('.build/'));
 });
 
 
