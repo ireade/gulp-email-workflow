@@ -1,10 +1,13 @@
 # A Gulp Workflow for Building HTML Emails
 
-This is a workflow for building HTML emails using Gulp. It comes with a default MailChimp supported template.
+
+![Sample Email](screenshot.png)
+
+This is a workflow for building HTML emails using Gulp. It comes with a default MailChimp-supported template.
 
 What it does -
 
-1. Builds HTML Templates
+1. Builds HTML from templates and partials
 2. Compiles SCSS to CSS
 3. Inlines your inline.css file
 4. Embeds your embedded.css file
@@ -13,22 +16,14 @@ What it does -
 
 
 
-## Requirements
-
-- Node.js
-- Gulp.js
-
-
-
 ## Getting Started
 
 
-### 1. Clone/copy repository
+**1. Clone this repository**
 
-Clone this repository using git
 
 ```
-git clone 
+git clone https://github.com/ireade/gulp-email-workflow.git
 cd gulp-email-workflow
 ```
 
@@ -50,16 +45,16 @@ npm install
 npm start
 ```
 
-The compiled and inlined output will be in the `build/` directory.
+The compiled and inlined output email will be in the `build/` directory.
 
 
 
 
-## How to Use
+## How to use
 
-### Creating Templates
+### Creating templates
 
-[Nunjucks](https://mozilla.github.io/nunjucks/) is used for compiling template files to HTML.
+This working uses [Nunjucks](https://mozilla.github.io/nunjucks/) for compiling template files to HTML.
 
 Templates are stored in `src/templates/` and partials in `src/templates/partials`. To create a template, create a file in the templates directory with the `.nunjucks` file extension. 
 
@@ -77,11 +72,11 @@ To define a block of dynamic content to be replaced by the email file, use the f
 ```
 
 
-### Creating Emails using Templates
+### Creating emails from templates
 
 To create an email based off a template file, create a new file in the `src/emails/` directory.
 
-To use a template file, use the folloing syntax -
+To use a template file, use the following syntax -
 
 ```
 {% include "partials/PARTIAL_FILE_NAME.nunjucks" %}
@@ -90,7 +85,17 @@ To use a template file, use the folloing syntax -
 To define the contents of a dynamic content block, use the following syntax -
 
 ```
+{% block CUSTOM_BLOCK_NAME %} 
+Lorem ipsum dolor sit amet
+{% endblock %}
 ```
+
+
+### Working with global data
+
+Global data is stored in the `src/data` directory as JSON files. 
+
+
 
 
 ### CSS
@@ -98,7 +103,9 @@ To define the contents of a dynamic content block, use the following syntax -
 SASS files are stored in the `src/sass/` directory. There are two SASS files -
 
 - `inline.scss` for styles you want to be inlined to their elements
-- `embedded.scss` for styles that can't be inlined. These will be inlcluded within a `<style>` element in the `<head>`
+- `embedded.scss` for styles that shouldn't be inlined. These will be inlcluded within a `<style>` element in the `<head>`
+
+You can create subdirectories within the SASS folder to hold any partials. 
 
 
 

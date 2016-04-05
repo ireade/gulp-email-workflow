@@ -1,5 +1,19 @@
+
+/* *************
+  Config
+************* */
+
+var globalData = {
+    mailchimp: require('./src/data/mailchimp.json')
+};
+
+
+
+
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+
 
 
 /* *************
@@ -69,9 +83,7 @@ gulp.task('nunjucks', ['sassEmbedded'], function() {
     return gulp.src('.src/emails/*.nunjucks')
         .pipe(
             data(function() {
-                return {
-                    mailchimp: require('./src/data/mailchimp.json')
-                };
+                return globalData;
             })
             .on('error', gutil.log)
         )
