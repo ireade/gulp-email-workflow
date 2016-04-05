@@ -15,7 +15,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 
 
-
 /* *************
   CSS
 ************* */
@@ -80,7 +79,7 @@ var nunjucksRender = require('gulp-nunjucks-render');
 var data = require('gulp-data');
 
 gulp.task('nunjucks', ['sassEmbedded'], function() {
-    return gulp.src('.src/emails/*.nunjucks')
+    return gulp.src('src/emails/*.nunjucks')
         .pipe(
             data(function() {
                 return globalData;
@@ -89,11 +88,11 @@ gulp.task('nunjucks', ['sassEmbedded'], function() {
         )
         .pipe(
             nunjucksRender({
-                path: ['.src/templates/', '.build/css/']
+                path: ['src/templates/', 'build/css/']
             })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('.build/'));
+        .pipe(gulp.dest('build/'));
 });
 
 
@@ -133,8 +132,3 @@ gulp.task('watch', function() {
 ************* */
 
 gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
-
-
-
-
-

@@ -1,17 +1,16 @@
 # A Gulp Workflow for Building HTML Emails
 
 
-![Sample Email](screenshot.png)
+![Sample Email Template ](screenshot.png)
 
 This is a workflow for building HTML emails using Gulp. It comes with a default MailChimp-supported template.
 
 What it does -
 
-1. Builds HTML from templates and partials
+1. Builds HTML email from templates and partials
 2. Compiles SCSS to CSS
-3. Inlines your inline.css file
-4. Embeds your embedded.css file
-5. Generates a preview of emails
+3. Inlines the `inline.css` file and embeds the `embedded.css` file
+4. Generates a preview of emails
 
 
 
@@ -19,7 +18,15 @@ What it does -
 ## Getting Started
 
 
-**1. Clone this repository**
+#### 1. Installl dependencies
+
+This workflow requires the following dependencies -
+
+- Node.js with npm ([Install](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager))
+- Gulp.js (Install with `npm install gulp`)
+
+
+#### 2. Clone this repository
 
 
 ```
@@ -32,14 +39,14 @@ Or download as a ZIP file.
 
 
 
-### 2. Install packages
+#### 3. Install packages
 
 ```
 npm install
 ```
 
 
-### 3. Start build
+#### 4. Start build
 
 ```
 npm start
@@ -52,9 +59,9 @@ The compiled and inlined output email will be in the `build/` directory.
 
 ## How to use
 
-### Creating templates
+#### Creating templates
 
-This working uses [Nunjucks](https://mozilla.github.io/nunjucks/) for compiling template files to HTML.
+[Nunjucks](https://mozilla.github.io/nunjucks/) is used for compiling template files to HTML.
 
 Templates are stored in `src/templates/` and partials in `src/templates/partials`. To create a template, create a file in the templates directory with the `.nunjucks` file extension. 
 
@@ -72,11 +79,11 @@ To define a block of dynamic content to be replaced by the email file, use the f
 ```
 
 
-### Creating emails from templates
+#### Creating emails from templates
 
 To create an email based off a template file, create a new file in the `src/emails/` directory.
 
-To use a template file, use the following syntax -
+Specify which template to use using the following syntax -
 
 ```
 {% include "partials/PARTIAL_FILE_NAME.nunjucks" %}
@@ -91,25 +98,47 @@ Lorem ipsum dolor sit amet
 ```
 
 
-### Working with global data
+#### Working with global data
 
-Global data is stored in the `src/data` directory as JSON files. 
+Global data is stored in the `src/data` directory as JSON files. Include new data files in the config sections of the `gulpfile.js` using this structure - 
+
+```javascript
+var globalData = {
+    DATA_NAME_1: require('./src/data/FILE_NAME_1.json'),
+    DATA_NAME_2: require('./src/data/FILE_NAME_2.json')
+};
+
+```
+
+For example -
+
+```javascript
+var globalData = {
+    mailchimp: require('./src/data/mailchimp.json')
+};
+
+```
 
 
 
 
-### CSS
+#### CSS
 
-SASS files are stored in the `src/sass/` directory. There are two SASS files -
+SASS files are stored in the `src/sass/` directory. There are two main SASS files -
 
-- `inline.scss` for styles you want to be inlined to their elements
+- `inline.scss` for styles you w Liant to be inlined to their elements
 - `embedded.scss` for styles that shouldn't be inlined. These will be inlcluded within a `<style>` element in the `<head>`
 
-You can create subdirectories within the SASS folder to hold any partials. 
+You can create subdirectories within the SASS folder to hold any partials. Make sure to precede the name of a partial with an underscore, e.g. `_reset.scss`.
 
 
 
 
+
+## Footnotes
+
+- Created by [Ire Aderinokun](http://ireaderinokun.com)
+- Licence
 
 
 

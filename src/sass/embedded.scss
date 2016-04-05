@@ -10,7 +10,7 @@
 
   h2 {
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   h3 {
@@ -39,5 +39,14 @@
   code {
     background-color: #F5F5F5;
   }
+
+
+  blockquote {
+    margin: 0 0 10px;
+    border-left: 5px solid #F5F5F5;
+    padding: 5px 10px;
+    font-style: italic;
+  }
+
 
 }
