@@ -52,14 +52,11 @@ Build Better Emails
 	The first of the month is coming, we have to get money, we have no choice. 
 </blockquote>
 
-<h2>Some people can’t handle success, I can</h2>
-
-<p>In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. Egg whites, turkey sausage, wheat toast, water. Of course they don’t want us to eat our breakfast, so we are going to enjoy our breakfast. </p>
 {% endblock %}
 
 
 
 {% block email_footer %} 
-<p>They will try to close the door on you, just open it. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm.</p>
+Thank you for reading!
 {% endblock %}
 

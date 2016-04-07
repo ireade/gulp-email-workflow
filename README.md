@@ -81,26 +81,26 @@ To define a block of dynamic content to be replaced by the email file, use the f
 
 #### Creating emails from templates
 
-To create an email based off a template file, create a new file in the `src/emails/` directory.
+To create an email based off a template file, create a new file in the `src/emails/` directory (also with the `.nunjucks` file extension).
 
 Specify which template to use using the following syntax -
 
 ```
-{% include "partials/PARTIAL_FILE_NAME.nunjucks" %}
+{% extends "TEMPLATE_NAME.nunjucks" %}
 ```
 
 To define the contents of a dynamic content block, use the following syntax -
 
 ```
 {% block CUSTOM_BLOCK_NAME %} 
-Lorem ipsum dolor sit amet
+Content goes here
 {% endblock %}
 ```
 
 
 #### Working with global data
 
-Global data is stored in the `src/data` directory as JSON files. Include new data files in the config sections of the `gulpfile.js` using this structure - 
+Global data is stored in the `src/data` directory as JSON files. Include new data files in the config section at the top of the `gulpfile.js` - 
 
 ```javascript
 var globalData = {
