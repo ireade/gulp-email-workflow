@@ -34,7 +34,7 @@ git clone https://github.com/ireade/gulp-email-workflow.git
 cd gulp-email-workflow
 ```
 
-Or download as a ZIP file.
+Or [download as a ZIP](https://github.com/ireade/gulp-email-workflow/archive/master.zip).
 
 
 
@@ -138,7 +138,6 @@ You can create subdirectories within the SASS folder to hold any partials. Make 
 ## Footnotes
 
 - Created by [Ire Aderinokun](http://ireaderinokun.com)
-- Licence
 
 
 
