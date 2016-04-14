@@ -48,7 +48,7 @@ gulp.task('sassEmbedded', function(callback) {
             sass({ outputStyle: 'compressed' })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('build/css/')); 
+        .pipe(gulp.dest('build/css/'));
 });
 
 
@@ -123,7 +123,7 @@ var filesToWatch = [
 ]
 
 gulp.task('watch', function() {
-    gulp.watch(filesToWatch,['nunjucks', 'inlinecss']); 
+    gulp.watch(filesToWatch,['nunjucks', 'inlinecss']);
 });
 
 
@@ -132,3 +132,16 @@ gulp.task('watch', function() {
 ************* */
 
 gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
+
+
+/* *************
+    ZIP
+************* */
+
+var zip = require('gulp-zip');
+
+gulp.task('zip', function () {
+    return gulp.src('build/**')
+        .pipe(zip('build.zip'))
+        .pipe(gulp.dest('./'));
+});

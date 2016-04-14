@@ -19,9 +19,11 @@
     "gulp-postcss": "^6.1.0",
     "gulp-sass": "^2.2.0",
     "gulp-util": "^3.0.7",
+    "gulp-zip": "^3.2.0",
     "postcss-scss": "^0.1.7"
   },
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "zip": "gulp zip"
   }
 }
