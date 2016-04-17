@@ -11,6 +11,7 @@ What it does -
 2. Compiles SCSS to CSS
 3. Inlines the `inline.css` file and embeds the `embedded.css` file
 4. Generates a preview of emails
+5. Creates a zip of the build directory for upload (optional)
 
 
 
@@ -133,13 +134,21 @@ You can create subdirectories within the SASS folder to hold any partials. Make 
 
 
 
+#### Generating the zip file
+
+You can also generate a zip file of the `build` directory for export. You can do this by running -
+
+```
+npm run zip
+```
+
+Alternatively, you can add it to the default and watch gulp tasks to have it generated automatically.
 
 
 ## Footnotes
 
 - Created by [Ire Aderinokun](http://ireaderinokun.com)
-
-
-
+- Contributions by [Zac Wasielewski](https://github.com/zacwasielewski)
+- MIT License
 
 

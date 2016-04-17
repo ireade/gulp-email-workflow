@@ -1,3 +1,6 @@
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+
 
 /* *************
   Config
@@ -6,13 +9,6 @@
 var globalData = {
     mailchimp: require('./src/data/mailchimp.json')
 };
-
-
-
-
-
-var gulp = require('gulp');
-var gutil = require('gulp-util');
 
 
 /* *************
@@ -96,6 +92,18 @@ gulp.task('nunjucks', ['sassEmbedded'], function() {
 });
 
 
+/* *************
+    ZIP
+************* */
+
+var zip = require('gulp-zip');
+
+gulp.task('zip', function () {
+    return gulp.src('build/**')
+        .pipe(zip('build.zip'))
+        .pipe(gulp.dest('./'));
+});
+
 
 /* *************
 	SERVER
@@ -134,14 +142,3 @@ gulp.task('watch', function() {
 gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
 
 
-/* *************
-    ZIP
-************* */
-
-var zip = require('gulp-zip');
-
-gulp.task('zip', function () {
-    return gulp.src('build/**')
-        .pipe(zip('build.zip'))
-        .pipe(gulp.dest('./'));
-});
