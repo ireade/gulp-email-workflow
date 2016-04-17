@@ -132,3 +132,16 @@ gulp.task('watch', function() {
 ************* */
 
 gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
+
+
+/* *************
+    ZIP
+************* */
+
+var zip = require('gulp-zip');
+
+gulp.task('zip', function () {
+    return gulp.src('build/**')
+        .pipe(zip('build.zip'))
+        .pipe(gulp.dest('./'));
+});
