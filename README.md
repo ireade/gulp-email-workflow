@@ -149,6 +149,6 @@ Alternatively, you can add it to the default and watch gulp tasks to have it gen
 
 - Created by [Ire Aderinokun](http://ireaderinokun.com)
 - Contributions by [Zac Wasielewski](https://github.com/zacwasielewski)
-- MIT License
+- [MIT License](https://github.com/ireade/gulp-email-workflow/blob/master/license.txt)
 
 
