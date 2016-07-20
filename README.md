@@ -19,7 +19,7 @@ What it does -
 ## Getting Started
 
 
-#### 1. Installl dependencies
+#### 1. Install dependencies
 
 This workflow requires the following dependencies -
 
