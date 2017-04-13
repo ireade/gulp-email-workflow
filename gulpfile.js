@@ -60,7 +60,8 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
             })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest('build/'))
+        .pipe(connect.reload());
 });
 
 
