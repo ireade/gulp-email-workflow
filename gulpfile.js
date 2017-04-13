@@ -113,7 +113,8 @@ var connect = require('gulp-connect');
 
 gulp.task('connect', function() {
     connect.server({
-        port: 8000
+        port: 8000,
+        root: 'build' // Serve from build directory instead
     });
 });
 
