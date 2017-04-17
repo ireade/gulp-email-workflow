@@ -53,7 +53,7 @@ npm install
 npm start
 ```
 
-The compiled and inlined output email will be in the `build/` directory.
+The compiled and inlined output email will be in the `build/` directory. Can be previewed in browser at `http://localhost:8000`
 
 
 

@@ -60,7 +60,8 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
             })
             .on('error', gutil.log)
         )
-        .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest('build/'))
+        .pipe(connect.reload());
 });
 
 
@@ -113,7 +114,9 @@ var connect = require('gulp-connect');
 
 gulp.task('connect', function() {
     connect.server({
-        port: 8000
+        port: 8000,
+        root: 'build', // Serve from build directory instead,
+        livereload:true
     });
 });
 
