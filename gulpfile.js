@@ -23,7 +23,7 @@ var postcssProcessors = [
     autoprefixer( { browsers: ['last 2 versions', 'ie > 10'] } )
 ]
 
-gulp.task('sassInline', function(callback) {
+gulp.task('sassInline', function() {
     return gulp.src('src/sass/inline.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
@@ -35,7 +35,7 @@ gulp.task('sassInline', function(callback) {
         .pipe(gulp.dest('build/css/'));
 });
 
-gulp.task('sassEmbedded', function(callback) {
+gulp.task('sassEmbedded', function() {
     return gulp.src('src/sass/embedded.scss')
         .pipe(
            postcss(postcssProcessors, {syntax: scss})
@@ -47,11 +47,9 @@ gulp.task('sassEmbedded', function(callback) {
         .pipe(gulp.dest('build/css/')); 
 });
 
-
-
 var inlineCss = require('gulp-inline-css');
 
-gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
+gulp.task('inlinecss', function() {
     return gulp.src('build/*.html')
         .pipe(
             inlineCss({
@@ -65,9 +63,6 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
 });
 
 
-
-
-
 /* *************
   TEMPLATING
 ************* */
@@ -75,7 +70,7 @@ gulp.task('inlinecss', ['sassInline', 'nunjucks'], function() {
 var nunjucksRender = require('gulp-nunjucks-render');
 var data = require('gulp-data');
 
-gulp.task('nunjucks', ['sassEmbedded'], function() {
+gulp.task('nunjucks', function() {
     return gulp.src('src/emails/*.nunjucks')
         .pipe(
             data(function() {
@@ -107,19 +102,29 @@ gulp.task('zip', function () {
 
 
 /* *************
-	SERVER
+    SERVER
 ************* */
 
 var connect = require('gulp-connect');
 
-gulp.task('connect', function() {
+gulp.task('connect', function(done) {
     connect.server({
         port: 8000,
         root: 'build', // Serve from build directory instead,
         livereload:true
     });
+    done();
 });
 
+
+/* *************
+    BUILD
+************* */
+
+gulp.task('build', gulp.series(
+        gulp.parallel('sassInline', 'sassEmbedded'), 'nunjucks', 'inlinecss'
+    )
+);
 
 
 /* *************
@@ -134,7 +139,7 @@ var filesToWatch = [
 ]
 
 gulp.task('watch', function() {
-    gulp.watch(filesToWatch,['nunjucks', 'inlinecss']); 
+    return gulp.watch(filesToWatch, gulp.series('build')); 
 });
 
 
@@ -142,6 +147,4 @@ gulp.task('watch', function() {
     DEFAULT
 ************* */
 
-gulp.task('default', ['connect', 'nunjucks', 'inlinecss', 'watch']);
-
-
+gulp.task('default', gulp.parallel('connect', 'build', 'watch'));
